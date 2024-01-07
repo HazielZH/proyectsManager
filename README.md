@@ -1,9 +1,5 @@
-# A proyectmanager Flet app
+Proyect Manager
 
-An example of a minimal Flet app.
+Windows only
 
-To run the app:
-
-```
-flet run [app_directory]
-```
+Flet App
