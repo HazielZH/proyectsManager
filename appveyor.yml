@@ -14,7 +14,7 @@ install:
 - pip install -r requirements.txt
 
 build_script:
-- flet pack main.py --name "Proyects Manager" --icon assets\proyectManager.ico --product-name ProyectManager --product-version "1.0.0"
+- flet pack main.py --name ProyectsManager --icon assets\proyectManager.ico --product-name ProyectManager --product-version "1.0.0"
 
 test: off
 
@@ -38,4 +38,4 @@ for:
   - 7z a proyect-manager-windows.zip %CD%\dist\*.exe
 
   artifacts:
-  - path: dist\Proyects Manager.exe
+  - path: dist/Proyects Manager.exe
