@@ -15,7 +15,6 @@ def main(page: ft.Page):
     global currentDir
     listOfDirectories = ft.Column()
     page.scroll = True
-    page.client_storage.clear()
     
     def customDir(e):
         if os.path.exists(e.control.value):
