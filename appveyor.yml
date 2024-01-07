@@ -1,7 +1,5 @@
 image:
 - Visual Studio 2019
-- macOS
-- Ubuntu
 
 skip_branch_with_pr: true
 stack: python 3.10
@@ -38,32 +36,4 @@ for:
   - 7z a counter-windows.zip %CD%\dist\*.exe
 
   artifacts:
-  - path: counter-windows.zip
-
-#
-#   macOS package
-# 
--
-  matrix:
-    only:
-    - image: macOS
-
-  after_build:
-  - tar -czvf counter-macos.tar.gz -C dist counter.app
-
-  artifacts:
-  - path: counter-macos.tar.gz
-
-#
-#   Linux package
-# 
--
-  matrix:
-    only:
-    - image: Ubuntu
-
-  after_build:
-  - tar -czvf counter-linux.tar.gz -C dist counter
-
-  artifacts:
-  - path: counter-linux.tar.gz
+  - path: proyect-manager-windows.zip
