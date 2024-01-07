@@ -8,6 +8,7 @@ environment:
   GITHUB_TOKEN:
     secure: /vAqj/nAkorMNahSdPaw88gmv6J2nQ4R8H2TmoT69XEzqxDNOlLVDeauxDwI84skU8esQR2GPO36PtcpBXmcHSehDOx69gBptB+IW4BSFnzEafXSkeyJNm1md4ech7X+
   APPVEYOR_REPO_TAG: true
+  APPVEYOR_REPO_TAG_NAME: "1.0.0"
 
 install:
 - pip install -r requirements.txt
