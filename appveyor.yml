@@ -38,4 +38,4 @@ for:
   - 7z a proyect-manager-windows.zip %CD%\dist\*.exe
 
   artifacts:
-  - path: "dist/ProyectsManager.exe"
+  - path: dist/ProyectsManager.exe
