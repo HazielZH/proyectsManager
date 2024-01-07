@@ -17,7 +17,7 @@ build_script:
 test: off
 
 # Publish artifacts to GitHub Releases on "tag" builds
-skip_tags: true
+skip_tags: false
 deploy:
   provider: GitHub
   auth_token: $(GITHUB_TOKEN)
