@@ -5,8 +5,6 @@ import json
 import asyncio
 
 
-
-
 def main(page: ft.Page):
     mainColumn = ft.Column()
     page.title = "Proyect Manager"
@@ -17,7 +15,7 @@ def main(page: ft.Page):
     global currentDir
     listOfDirectories = ft.Column()
     page.scroll = True
-    
+    page.client_storage.clear()
     
     def customDir(e):
         if os.path.exists(e.control.value):
@@ -41,11 +39,9 @@ def main(page: ft.Page):
             osUser = os.getlogin()
             codePath = f"C:\\Users\\{osUser}\\AppData\\Local\\Programs\\Microsoft VS Code"
             if os.path.exists(codePath):
-                page.add(ft.Text(value="Existe code"))
                 page.client_storage.set("CodePath", codePath)
             else:
-                textDir = ft.TextField(helper_text="Ingresa el dir de vscode", on_submit=customDir)
-                mainColumn.controls.append(textDir)
+                openVLG(3)
     
     def checkStoragePath():
         if page.client_storage.contains_key("StoragePath"):
@@ -56,9 +52,7 @@ def main(page: ft.Page):
             if os.path.exists(storagePath):
                 page.client_storage.set("StoragePath", storagePath)
             else: 
-                textDir = ft.TextField(helper_text="Ingresa el dir de storage.json, este debe terminar tal que \\storage.json", on_submit=customDir)
-                mainColumn.controls.append(textDir)
-                mainColumn.update()
+                openVLG(4)
 
     def perfJson():
         Json = open(page.client_storage.get("StoragePath"), 'r')
@@ -73,10 +67,7 @@ def main(page: ft.Page):
         if page.client_storage.contains_key("ProyectsPath"):
             return
         else:
-            textDir = ft.TextField(helper_text="Ingresa el dir de tus proyectos", on_submit=customDir)
-            mainColumn.controls.append(textDir)
-            mainColumn.update()
-
+            openVLG(2)
     def changeProfile(e):
         profile = dropMenu.value
 
@@ -199,6 +190,8 @@ def main(page: ft.Page):
     def changeDefaultDirectory(e):
         if "VSCode" in e.control.hint_text:
             path = "CodePath"
+        elif "Storage.json" in e.control.hint_text:
+            path = "StoragePath"
         else:
             path = "ProyectsPath"
             global currentDir
@@ -211,14 +204,28 @@ def main(page: ft.Page):
         
 
     def openVLG(i):
+        title_ = "Change path"
+        content_ = "Leave blank if you do not want to change the path"
         if i == 1:
             path = "VSCode"
+        elif i == 2:
+            content_ = "Set the Path of your proyects"
+            title_ = "Set path"
+            path = "Proyects"
+        elif i == 3:
+            content_ = "Set the Path of your VSCode"
+            title_ = "Set path"
+            path = "VSCode"
+        elif i == 4:
+            content_ = "Set the Path of your storage.json"
+            title_ = "Set path"
+            path = "Storage.json"
         else:
             path = "Proyects"
         vlg = ft.AlertDialog(
             modal = True,
-            title= ft.Text("Change Path"),
-            content= ft.Text("Leave blank if you do not want to change the path"),
+            title= ft.Text(title_),
+            content= ft.Text(content_),
             actions=[
                 ft.TextField(hint_text=f"Path {path}", on_submit=changeDefaultDirectory)
             ],
@@ -237,22 +244,23 @@ def main(page: ft.Page):
     )
     page.add(
         ft.Row([
-            dropMenu,
-            ft.PopupMenuButton(
-                items=[
-                    ft.PopupMenuItem(on_click=addTextField, icon=ft.icons.ADD, text='Create Flet Proyect'),
-                    ft.PopupMenuItem(text='Create new Folder', icon=ft.icons.FOLDER, on_click=addTextField),
-                    ft.PopupMenuItem(text='Change proyects directory', icon=ft.icons.CHANGE_CIRCLE, on_click=lambda e : openVLG(0)),
-                    ft.PopupMenuItem(text='Change VSCode directory', icon=ft.icons.CHANGE_CIRCLE, on_click=lambda e : openVLG(1)),
+                dropMenu,
+                ft.PopupMenuButton(
+                    items=[
+                        ft.PopupMenuItem(on_click=addTextField, icon=ft.icons.ADD, text='Create Flet Proyect'),
+                        ft.PopupMenuItem(text='Create new Folder', icon=ft.icons.FOLDER, on_click=addTextField),
+                        ft.PopupMenuItem(text='Change proyects directory', icon=ft.icons.CHANGE_CIRCLE, on_click=lambda e : openVLG(0)),
+                        ft.PopupMenuItem(text='Change VSCode directory', icon=ft.icons.CHANGE_CIRCLE, on_click=lambda e : openVLG(1)),
+                    ]
+                ),
                 ]
             ),
-            ]
-        ),
-        ft.TextButton(
-            text= '...',
-            on_click=parentDirectory
-        ),
-        listOfDirectories,
+            ft.TextButton(
+                text= '...',
+                on_click=parentDirectory
+            ),
+            listOfDirectories,
+            mainColumn
     )
     if not page.client_storage.contains_key("CodePath"):
         checkCodePath()
