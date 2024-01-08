@@ -66,10 +66,8 @@ def main(page: ft.Page):
             return True
         except KeyError:
             # La clave 'userDataProfiles' no existe en el JSON
-            page.controls.remove(dropMenu)
             return False
         except Exception as e:
-            page.controls.remove(dropMenu)
             return False
 
     def checkProyectsPath():
