@@ -7,14 +7,12 @@ stack: python 3.10
 environment:
   GITHUB_TOKEN:
     secure: /vAqj/nAkorMNahSdPaw87qExCfPoD0jvWCKE3rGMndVth55ovxVhPhQiLzkCWgYcBbGxKXSy84WuxhKQI+3WQJ/xeVcYRzy50j4f5TKN2nKZrIRlxUPSnwNfiXyCGYX
-  APPVEYOR_REPO_TAG: true
-  APPVEYOR_REPO_TAG_NAME: "1.0.0"
 
 install:
 - pip install -r requirements.txt
 
 build_script:
-- flet pack main.py --name ProyectsManager --icon assets\proyectManager.ico --product-name ProyectManager --product-version "1.0.0"
+- flet pack main.py --name proyectManager --icon proyectManager.ico --product-name proyectManager --product-version "1.0.0"
 
 test: off
 
@@ -22,9 +20,9 @@ test: off
 deploy:
   provider: GitHub
   auth_token: $(GITHUB_TOKEN)
-  tag: $(APPVEYOR_REPO_TAG_NAME)
   on:
     APPVEYOR_REPO_TAG: true
+
 #
 #   Windows package
 # 
@@ -35,8 +33,7 @@ for:
     - image: Visual Studio 2019
 
   after_build:
-    - 7z a proyect-manager-windows.zip %CD%\dist\*.exe
+  - 7z a counter-windows.zip %CD%\dist\*.exe
 
   artifacts:
-    - path: proyect-manager-windows.zip
-      name: winBuild
+  - path: counter-windows.zip
