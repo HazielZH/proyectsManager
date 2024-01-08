@@ -56,6 +56,9 @@ def main(page: ft.Page):
     def perfJson():
         Json = open(page.client_storage.get("StoragePath"), 'r')
         perfData = json.load(Json)
+        if not perfData['userDataProfiles']:
+            page.controls.remove(dropMenu)
+            return False
         for profiles in perfData['userDataProfiles']:
             dropMenu.options.append(ft.dropdown.Option(profiles['name']))
         Json.close()
