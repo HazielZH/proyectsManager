@@ -13,7 +13,7 @@ install:
 - pip install -r requirements.txt
 
 build_script:
-- flet pack main.py --name proyectManager --icon assets\proyectManager.ico --product-name proyectManager --product-version "1.0.0" --add-data "assets;assets"
+- flet pack main.py --name proyectManager --icon assets\proyectManager.ico --product-name proyectManager --product-version "1.0.0" 
 
 test: off
 
@@ -34,7 +34,7 @@ for:
     - image: Visual Studio 2019
 
   after_build:
-  - 7z a counter-windows.zip \dist\*.exe
+  - 7z a counter-windows.zip %CD%\dist\*.exe
 
   artifacts:
   - path: counter-windows.zip
