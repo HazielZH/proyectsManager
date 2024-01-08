@@ -37,4 +37,4 @@ for:
   - 7z a %CD%\dist\counter-windows.zip %CD%\dist\*.exe
 
   artifacts:
-  - path: C:\dist\counter-windows.zip
+  - path: C:\dist\*.exe
