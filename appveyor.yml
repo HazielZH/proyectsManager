@@ -38,4 +38,5 @@ for:
     - 7z a proyect-manager-windows.zip %CD%\dist\*.exe
 
   artifacts:
-    - path: %CD%\dist\proyect-manager-windows.zip
+    - path: proyect-manager-windows.zip
+      name: winBuild
