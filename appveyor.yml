@@ -34,7 +34,7 @@ for:
     - image: Visual Studio 2019
 
   after_build:
-  - 7z a %CD%\dist\counter-windows.zip %CD%\dist\*.exe
+  - 7z a proyect-manager-windows.zip %CD%\dist\*.exe
 
   artifacts:
-  - path: C:\dist\*.exe
+  - path: proyect-manager-windows.zip
