@@ -54,16 +54,23 @@ def main(page: ft.Page):
                 openVLG(4)
 
     def perfJson():
-        Json = open(page.client_storage.get("StoragePath"), 'r')
-        perfData = json.load(Json)
-        if not perfData['userDataProfiles']:
+        try:
+            Json = open(page.client_storage.get("StoragePath"), 'r')
+            perfData = json.load(Json)
+            Json.close()
+
+            for profiles in perfData['userDataProfiles']:
+                dropMenu.options.append(ft.dropdown.Option(profiles['name']))
+
+            print(dropMenu.options)
+            return True
+        except KeyError:
+            # La clave 'userDataProfiles' no existe en el JSON
             page.controls.remove(dropMenu)
             return False
-        for profiles in perfData['userDataProfiles']:
-            dropMenu.options.append(ft.dropdown.Option(profiles['name']))
-        Json.close()
-        print(dropMenu.options)
-        return True
+        except Exception as e:
+            page.controls.remove(dropMenu)
+            return False
 
     def checkProyectsPath():
         if page.client_storage.contains_key("ProyectsPath"):
