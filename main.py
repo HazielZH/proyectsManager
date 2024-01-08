@@ -102,12 +102,12 @@ def main(page: ft.Page):
                         controls=[
                             ft.ElevatedButton(
                                 content=ft.Row([ft.Image(src="vscode-icon.png", width=25, height=25)]),
-                                tooltip="Ejecutar en VS-Code",
+                                tooltip="Open folder in VS-Code",
                                 on_click=lambda e: ExecuteVSCODE(widgetPath)
                             ),
                             ft.IconButton(
                                 ft.icons.DELETE_OUTLINE,
-                                tooltip="Delete To-Do",
+                                tooltip="Delete Folder",
                                 on_click=lambda e: deleteFolder(widgetPath, row)
                             )
                         ],
