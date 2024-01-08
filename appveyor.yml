@@ -34,7 +34,7 @@ for:
     - image: Visual Studio 2019
 
   after_build:
-  - 7z a counter-windows.zip %CD%\dist\*.exe
+  - 7z a counter-windows.zip \dist\*.exe
 
   artifacts:
   - path: counter-windows.zip
