@@ -7,6 +7,7 @@ stack: python 3.10
 environment:
   GITHUB_TOKEN:
     secure: /vAqj/nAkorMNahSdPaw87qExCfPoD0jvWCKE3rGMndVth55ovxVhPhQiLzkCWgYcBbGxKXSy84WuxhKQI+3WQJ/xeVcYRzy50j4f5TKN2nKZrIRlxUPSnwNfiXyCGYX
+  APPVEYOR_REPO_TAG: true
   APPVEYOR_REPO_TAG_NAME: "1.0.0"
 
 install:
@@ -37,4 +38,4 @@ for:
     - 7z a proyect-manager-windows.zip %CD%\dist\*.exe
 
   artifacts:
-    - path: dist\proyect-manager-windows.zip
+    - path: %CD%\dist\proyect-manager-windows.zip
