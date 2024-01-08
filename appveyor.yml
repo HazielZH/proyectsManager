@@ -1,5 +1,7 @@
 image:
 - Visual Studio 2019
+- macOS
+- Ubuntu
 
 skip_branch_with_pr: true
 stack: python 3.10
@@ -7,7 +9,6 @@ stack: python 3.10
 environment:
   GITHUB_TOKEN:
     secure: /vAqj/nAkorMNahSdPaw87qExCfPoD0jvWCKE3rGMndVth55ovxVhPhQiLzkCWgYcBbGxKXSy84WuxhKQI+3WQJ/xeVcYRzy50j4f5TKN2nKZrIRlxUPSnwNfiXyCGYX
-  APPVEYOR_REPO_TAG: true
 
 install:
 - pip install -r requirements.txt
@@ -34,7 +35,35 @@ for:
     - image: Visual Studio 2019
 
   after_build:
-  - 7z a proyect-manager-windows.zip %CD%\dist\*.exe
+  - 7z a counter-windows.zip %CD%\dist\*.exe
 
   artifacts:
-  - path: proyect-manager-windows.zip
+  - path: counter-windows.zip
+
+#
+#   macOS package
+# 
+-
+  matrix:
+    only:
+    - image: macOS
+
+  after_build:
+  - tar -czvf counter-macos.tar.gz -C dist counter.app
+
+  artifacts:
+  - path: counter-macos.tar.gz
+
+#
+#   Linux package
+# 
+-
+  matrix:
+    only:
+    - image: Ubuntu
+
+  after_build:
+  - tar -czvf counter-linux.tar.gz -C dist counter
+
+  artifacts:
+  - path: counter-linux.tar.gz
