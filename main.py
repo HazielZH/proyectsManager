@@ -199,10 +199,12 @@ def main(page: ft.Page):
             getDirectories()
         page.client_storage.set(path, e.control.value)
         page.dialog.open = False
+        checkClientStorage()
         page.update()
         
 
     def openVLG(i):
+        if page.dialog is open: return 
         title_ = "Change path"
         content_ = "Leave blank if you do not want to change the path"
         if i == 1:
@@ -261,12 +263,14 @@ def main(page: ft.Page):
             listOfDirectories,
             mainColumn
     )
-    if not page.client_storage.contains_key("CodePath"):
-        checkCodePath()
-    if not page.client_storage.contains_key("StoragePath"):
-        checkStoragePath()
-    if not page.client_storage.contains_key("ProyectsStorage"):
-        checkProyectsPath()
+    def checkClientStorage():
+        if not page.client_storage.contains_key("CodePath"):
+            checkCodePath()
+        if not page.client_storage.contains_key("StoragePath"):
+            checkStoragePath()
+        if not page.client_storage.contains_key("ProyectsStorage"):
+            checkProyectsPath()
+    checkClientStorage()
     currentDir = page.client_storage.get('ProyectsPath')
     perfJson()
     dropMenu.update()
